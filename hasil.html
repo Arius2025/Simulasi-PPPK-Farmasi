@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Hasil Simulasi PPPK Farmasi</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body { padding: 2rem; }
+    .score-box { font-size: 1.5rem; font-weight: bold; }
+    .category-score { margin-top: 1rem; }
+    .explanation-box { background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+  <h3 class="text-primary mb-4">Hasil Simulasi PPPK Farmasi</h3>
+  <div id="namaPeserta" class="mb-3 fw-bold"></div>
+  <div class="score-box text-success mb-3">Skor Akhir: <span id="totalScore"></span></div>
+
+  <div id="categoryScores" class="category-score"></div>
+
+  <hr>
+  <h5 class="mb-3">Pembahasan Soal</h5>
+  <div id="explanationsContainer"></div>
+
+  <script>
+    const nama = localStorage.getItem("namaPeserta") || "Peserta";
+    const totalScore = localStorage.getItem("score") || 0;
+    const explanations = JSON.parse(localStorage.getItem("explanations") || "[]");
+
+    document.getElementById("namaPeserta").textContent = `Nama Peserta: ${nama}`;
+    document.getElementById("totalScore").textContent = `${totalScore}`;
+
+    function calculateCategoryScores(explanations) {
+      const categoryScores = {};
+      explanations.forEach(e => {
+        if (!categoryScores[e.category]) categoryScores[e.category] = 0;
+        categoryScores[e.category] += e.score;
+      });
+      return categoryScores;
+    }
+
+    const categoryScores = calculateCategoryScores(explanations);
+    const categoryContainer = document.getElementById("categoryScores");
+    for (const [category, score] of Object.entries(categoryScores)) {
+      const div = document.createElement("div");
+      div.textContent = `✅ ${category}: ${score.toFixed(1)} poin`;
+      categoryContainer.appendChild(div);
+    }
+
+    const container = document.getElementById("explanationsContainer");
+    explanations.forEach((e, i) => {
+      const box = document.createElement("div");
+      box.className = "explanation-box";
+      box.innerHTML = `
+        <div><strong>Soal ${i + 1} (${e.category})</strong></div>
+        <div class="mb-2">${e.question}</div>
+        <div><strong>Jawaban Benar:</strong> ${e.correct}</div>
+        <div><strong>Penjelasan:</strong> ${e.explanation}</div>
+        <div><strong>Skor:</strong> ${e.score}</div>
+      `;
+      container.appendChild(box);
+    });
+  </script>
+</body>
+</html>

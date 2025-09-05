@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Simulasi PPPK Farmasi</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <script>
+    // Menghapus data nama peserta setiap kali halaman login dimuat
+    localStorage.removeItem("namaPeserta");
+  </script>
+  <div class="container mt-5">
+    <div class="card p-4 shadow-sm mx-auto" style="max-width: 400px;">
+      <h4 class="mb-3 text-center">🔐 Login Simulasi PPPK Farmasi</h4>
+      <form onsubmit="event.preventDefault(); login();">
+        <div class="mb-3">
+          <label for="nama" class="form-label">Nama Peserta</label>
+          <input type="text" id="nama" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Masuk</button>
+      </form>
+    </div>
+  </div>
+  <script>
+    function login() {
+      const nama = document.getElementById("nama").value.trim();
+      if (nama) {
+        localStorage.setItem("namaPeserta", nama);
+        window.location.href = "menu.html";
+      }
+    }
+  </script>
+</body>
+</html>

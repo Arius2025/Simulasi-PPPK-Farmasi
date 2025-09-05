@@ -1,0 +1,69 @@
+/* Warna latar belakang umum */
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #000; /* pastikan semua teks default berwarna hitam */
+}
+
+#question-number,
+#question-text,
+#options-form label {
+  color: #000 !important;
+  font-size: 1.1rem;
+}
+
+/* Kontainer utama quiz */
+#quiz-box, #quiz-container {
+  max-width: 700px;
+  margin: auto;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Teks soal dan nomor */
+#question-number,
+#question-text {
+  color: #000;
+  font-size: 1.1rem;
+}
+
+/* Pilihan jawaban */
+#options-form label {
+  color: #000 !important;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Tombol navigasi */
+button {
+  font-size: 1rem;
+  padding: 10px 20px;
+}
+
+/* Timer dan nama peserta */
+#timer,
+#namaPeserta {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Responsif untuk layar kecil */
+@media (max-width: 576px) {
+  #quiz-box, #quiz-container {
+    padding: 15px;
+  }
+
+  #question-text,
+  #question-number,
+  #options-form label {
+    font-size: 1rem;
+  }
+
+  button {
+    font-size: 0.95rem;
+    padding: 8px 16px;
+  }
+}
